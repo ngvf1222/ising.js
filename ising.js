@@ -410,18 +410,16 @@ function undotextbox(id){
 }
 
 function update_temp(){
-    min = document.getElementById('temp').min;
+    min = 0
     gTval = parseFloat(document.getElementById('temp').value);
     if (gTval <= min)
         gT = 0;
     else
-        gT = Math.pow(10, gTval);
-    document.getElementById('label_temp').innerHTML = toFixed(gT,6);
+        gT = gTval;
     calculateFlipTable(gT, gfield);
 }
 function update_field(){
     gfield = parseFloat(document.getElementById('field').value);
-    document.getElementById('label_field').innerHTML = toFixed(gfield,6);
     calculateFlipTable(gT, gfield);
     reset_measurements();
 }
@@ -759,6 +757,22 @@ if ( !window.requestAnimationFrame ) {
       };
     } )();
 }
+}
+function download_fieldt() {
+	let element = document.createElement('a');
+	let text = gboard.join();
+	element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+	element.setAttribute('download', 'download.txt');
+	element.style.display = 'none'; //하이퍼링크 요소가 보이지 않도록 처리
+	document.body.appendChild(element); //DOM body요소에 하이퍼링크 부착
+	element.click(); //클릭 이벤트 트리거 - 이 시점에 다운로드 발생
+	document.body.removeChild(element);
+}
+async function loadFile(file) {
+        let text = await file.text();
+        ltext=text.split(',')
+		ltext=ltext.map((item)=>parseInt(item))
+		init_board(parseInt((ltext.length-1)**0.5),ltext)
 }
 
 

@@ -34,14 +34,14 @@
             <br>
             <div>
                 <label class='eb_label' for="temp" title="Temperature">Temperature</label>
-                <input style='width:150px;' type="range" id="temp" min=-5 max=2 step=0.000001 value=0 oninput='update_temp()' onchange="update_temp()"></input>
-                <span onclick='dotextbox(this.id)' class='eb_span' id="label_temp"></span>
+                <input style='width:150px;' type="text" id="temp" value=0 oninput='update_temp()' onchange="update_temp()"></input>
+                
                 <input style='width: 80px; display: none;' id='label_temp_input' type='text' value='' onblur='undotextbox(this.id)'>
             </div>
             <div>
                 <label class='eb_label' for="field" title="External field">Field</label>
-                <input style="width:150px;" type="range" id="field" min=-5 max=5 step=0.00001 value=0.0 oninput='update_field()' onchange="update_field()"></input>
-                <span onclick='dotextbox(this.id)' class='eb_span' id="label_field"></span>
+                <input style="width:150px;" type="text" id="field" value=0.0 oninput='update_field()' onchange="update_field()"></input>
+                
                 <input style='width: 80px; display: none;' id='label_field_input' type='text' value='' onblur='undotextbox(this.id)'>
             </div>
             <div>
@@ -57,14 +57,7 @@
             </div>
             <div class="withspace">
                 <label class='eb_label' for='num'>Lattice size</label>
-                <select id='changenum' onchange='change_num()'>
-                    <option value="512">512</option>
-                    <option value="256" selected="selected">256</option>
-                    <option value="128">128</option>
-                    <option value="64">64</option>
-                    <option value="32">32</option>
-                    <option value="16">16</option>
-                </select>
+                <input style="width:150px;" type="text" id="changenum" value=256 onchange="change_num()"></input>
             </div>
             <div class="withspace">
                 <label class='eb_label' for='num'>Graph type</label>
@@ -88,7 +81,13 @@
                 <br>
                 <input type='button' id='downloaddata' value='Download data' onclick='download_measurements()'></input>
                 <input type='button' id='downloadgraph' value='Download graph' onclick='download_graph()'></input>
-                <input type='button' id='downloadgraph' value='Download field' onclick='download_field()'></input>
+                <input type='button' id='downloadgraph' value='Download field(img)' onclick='download_field()'></input>
+                <input type='button' id='downloadgraph' value='Download field(text)' onclick='download_fieldt()'></input>
+                <br>
+                <div>
+					<label class='eb_label' title="load field(text)" style="margin-left: 30%;">           load field(text)</label>
+					<input type="file" onchange="loadFile(this.files[0])">
+				</div>
                 </center>
             </div>
         </div>
